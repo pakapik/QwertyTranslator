@@ -36,13 +36,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="KeyLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\KeyLogger\bin\Release\KeyLogger.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,7 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KeyModifier.cs" />
     <Compile Include="ClipBoardUpdaterTextToText.cs" />
+    <Compile Include="MessageHandlerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MessageHandlerForm.Designer.cs">
+      <DependentUpon>MessageHandlerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Translator\EngToRusQwertyTranslator.cs" />
     <Compile Include="Translator\IQwertyTranslator.cs" />
     <Compile Include="Translator\Language.cs" />
@@ -66,7 +69,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="KeyLogger.dll" />
+    <EmbeddedResource Include="MessageHandlerForm.resx">
+      <DependentUpon>MessageHandlerForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
