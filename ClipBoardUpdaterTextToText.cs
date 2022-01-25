@@ -18,29 +18,35 @@ namespace QwertyTranslator
 
             clipboardText = _translator.Translate(clipboardText, GetLanguange());
 
-            Clipboard.SetText(clipboardText);
+            Clipboard.SetText(GetCorrectText(clipboardText));
         }
 
-        private static string GetClipboardText()
+        /// <summary>
+        /// Clipboard.SetText(clipboardText) throw ArgumentNullExecption, 
+        /// if clipboardText == string.Empty
+        /// </summary>
+        /// <param name="text">to contains to Clipboard</param>
+        /// <returns></returns>
+        private string GetCorrectText(string clipboardText)
+        {
+            return clipboardText = string.IsNullOrEmpty(clipboardText)
+                 ? " "
+                 : clipboardText;
+        }
+
+        private string GetClipboardText()
         {
             var clipboardText = string.Empty;
 
             if (Clipboard.ContainsText(TextDataFormat.UnicodeText))
             {
                 clipboardText = Clipboard.GetText(TextDataFormat.UnicodeText);
-
-                // Clipboard.SetText(clipboardText) throw ArgumentNullExecption, 
-                // if clipboardText == string.Empty
-
-                clipboardText = string.IsNullOrEmpty(clipboardText)
-                              ? " "
-                              : clipboardText;
             }
 
             return clipboardText;
         }
 
-        private static Language GetLanguange() => (Language)GetKeyboardLayout(GetWindowThreadProcessId(GetForegroundWindow(), IntPtr.Zero));
+        private Language GetLanguange() => (Language)GetKeyboardLayout(GetWindowThreadProcessId(GetForegroundWindow(), IntPtr.Zero));
 
         #region DllImport
 
