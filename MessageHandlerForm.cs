@@ -37,7 +37,6 @@ namespace QwertyTranslator
 
             _updater = new ClipBoardUpdaterTextToText(translator);
         }
-
         
         private void MessageHandler_FormClosing(object sender, FormClosingEventArgs e) => UnregisterHotKey(Handle, 0);
 
