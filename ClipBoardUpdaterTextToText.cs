@@ -25,10 +25,16 @@ namespace QwertyTranslator
         {
             var clipboardText = string.Empty;
 
-            var clipboardData = Clipboard.GetDataObject();
-            if (clipboardData != null && clipboardData.GetDataPresent(DataFormats.UnicodeText))
+            if (Clipboard.ContainsText(TextDataFormat.UnicodeText))
             {
-                clipboardText = clipboardData.GetData(DataFormats.UnicodeText)?.ToString();
+                clipboardText = Clipboard.GetText(TextDataFormat.UnicodeText);
+
+                // Clipboard.SetText(clipboardText) throw ArgumentNullExecption, 
+                // if clipboardText == string.Empty
+
+                clipboardText = string.IsNullOrEmpty(clipboardText)
+                              ? " "
+                              : clipboardText;
             }
 
             return clipboardText;
