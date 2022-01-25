@@ -29,7 +29,7 @@ namespace QwertyTranslator
         /// <returns></returns>
         private string GetCorrectText(string clipboardText)
         {
-            return clipboardText = string.IsNullOrEmpty(clipboardText)
+            return string.IsNullOrEmpty(clipboardText)
                  ? " "
                  : clipboardText;
         }
